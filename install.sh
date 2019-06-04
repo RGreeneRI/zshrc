@@ -21,8 +21,8 @@ cd
 cp .zshrc zshrc.bak
 wget -O .zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc;
 echo "screenFetch" >> .zshrc;
-sed -i bak "s/alias ll='command ls -l/alias ll='command ls -lahF/" .zshrc;
-sed -i bak 's/alias ll="command ls -l/alias ll="command ls -lahF/' .zshrc;
+sed -i "s/alias ll='command ls -l/alias ll='command ls -lahF/" .zshrc;
+sed -i 's/alias ll="command ls -l/alias ll="command ls -lahF/' .zshrc;
 
 echo "Done!"
 echo ""
