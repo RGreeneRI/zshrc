@@ -24,6 +24,15 @@ echo "screenFetch" >> .zshrc;
 sed -i "s/alias ll='command ls -l/alias ll='command ls -lahF/" .zshrc;
 sed -i 's/alias ll="command ls -l/alias ll="command ls -lahF/' .zshrc;
 
-echo "Done!"
+echo ""
+echo ""
+echo "********************************************************************************"
+echo "********************************************************************************"
+echo "******                                                                    ******"
+echo "******   Done! Don't forget to make sure zsh is installed.                ******"
+echo "******   Change your shell by typing chsh -s /bin/zsh                     ******"
+echo "******                                                                    ******"
+echo "********************************************************************************"
+echo "********************************************************************************"
 echo ""
 echo ""
