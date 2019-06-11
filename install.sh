@@ -20,7 +20,7 @@ read -r -p "Press ENTER to continue, or Control-C to abort..." key
 cd
 cp .zshrc zshrc.bak
 wget -O .zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc;
-echo "screenFetch" >> .zshrc;
+echo "screenfetch" >> .zshrc;
 sed -i "s/alias ll='command ls -l/alias ll='command ls -lahF/" .zshrc;
 sed -i 's/alias ll="command ls -l/alias ll="command ls -lahF/' .zshrc;
 
