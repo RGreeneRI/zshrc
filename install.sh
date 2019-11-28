@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Tested on Ubuntu 18.04 and CentOS 7
+
 clear;
 
 echo "********************************************************************************"
@@ -14,16 +16,21 @@ echo "**************************************************************************
 echo ""
 echo ""
 
-# prompt user to press enter or not
+# Prompt user to press enter or not
 read -r -p "Press ENTER to continue, or Control-C to abort..." key
 
-#Download customized zshrc from grml and customize 
+# Download customized zshrc from grml and customize 
 cd
 if [ -f ".zshrc" ]; then
     echo "Backing up existing .zshrc file to zshrc.bak"
     cp .zshrc zshrc.bak
 fi
 wget -O .zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc;
+
+# Check if screenfetch is installed, and add to .zshrc if so
+echo "********************************************************************************"
+echo "Checking if screenfetch is installed";
+echo "********************************************************************************"
 which screenfetch
 if [ "$?" == "0" ]; then echo "screenfetch" >> .zshrc; fi
 
