@@ -66,11 +66,12 @@ fi
 
 # See if zsh is installed, and set as login shell if true
 which zsh
-if [ "$?" == "0" ]; then 
+if [ "$?" == "0" ]; then
+	ZSH_LOC="`which zsh`";
 	echo "********************************************************************************";
 	echo -e "zsh is installed, setting it as your login shell.  \nYou may be prompted for your password.";
 	echo "********************************************************************************";
-	chsh -s /bin/zsh;
+	chsh -s $ZSH_LOC;
 else 
 	echo "********************************************************************************";
 	echo -e "zsh is not installed! Install it, then use\n 'chsh -s /bin/zsh'\nto make it your login shell.";
