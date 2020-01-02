@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Variables
 OS="`uname`"
@@ -12,11 +12,16 @@ else
 which curl
 	if [ "$?" == "0" ]; then
 		DOWNLOADER="curl";
+	else
+	which fetch
+	        if [ "$?" == "0" ]; then
+        	        DOWNLOADER="fetch";
+		fi
 	fi
 fi
 
 if [ "$DOWNLOADER" == "None" ]; then
-	echo "You do not have wget or curl.  You need one of these to use this script.";
+	echo "You do not have wget, curl, or fetch.  You need one of these to use this script.";
 	exit 1;
 fi
 
@@ -42,8 +47,10 @@ fi
 echo "Downloading GRML's zshrc config as a starting point."
 if [ "$DOWNLOADER" == "curl" ]; then
 	curl -L -o .zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc;
-else
+elif [ "$DOWNLOADER" == "wget" ]; then
 	wget -O .zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc;
+else
+	fetch https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc -o .zshrc --no-verify-peer;
 fi
 
 # Check if screenfetch is installed, and add to .zshrc if so
@@ -52,10 +59,13 @@ which screenfetch
 if [ "$?" == "0" ]; then
 	echo "screenfetch is installed, adding to .zshrc";
 	echo "screenfetch" >> .zshrc;
+else
+	echo "screenfetch is not installed.  You should get it!";
 fi
 
 # Customize ll command
-if [ "$OS" == "Darwin" ]; then
+echo "Adding my customizations to the .zshrc file.";
+if [ "$OS" == "Darwin" ] || [ "$OS" == "FreeBSD" ]; then
 	sed -i.sed "s/alias ll='command ls -l/alias ll='command ls -lahFG/" .zshrc;
 	sed -i.sed 's/alias ll="command ls -l/alias ll="command ls -lahFG/' .zshrc;
 	rm .zshrc.sed;
@@ -65,6 +75,7 @@ else
 fi
 
 # See if zsh is installed, and set as login shell if true
+echo "Checking if zsh is installed";
 which zsh
 if [ "$?" == "0" ]; then
 	ZSH_LOC="`which zsh`";
