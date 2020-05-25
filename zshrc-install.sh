@@ -28,8 +28,7 @@ fi
 clear;
 echo "********************************************************************************"
 echo "******   This script will install a customized .zshrc file and backup     ******"
-echo "******   any existing one to zshrc.bak.  It will set zsh as your login    ******"
-echo "******   shell if it is present.                                          ******"
+echo "******   any existing one to zshrc.bak.                                   ******"
 echo "********************************************************************************"
 echo ""
 echo ""
@@ -60,7 +59,7 @@ if [ "$?" == "0" ]; then
 	echo "screenfetch is installed, adding to .zshrc";
 	echo "screenfetch" >> .zshrc;
 else
-	echo "screenfetch is not installed.  You should get it!";
+	echo "screenfetch is not installed.";
 fi
 
 # Customize ll command
@@ -74,30 +73,24 @@ else
 	sed -i 's/alias ll="command ls -l/alias ll="command ls -lahF/' .zshrc;
 fi
 
-# See if zsh is installed, and set as login shell if true
+echo ".zshrc file creation is complete";
+
+# See if zsh is installed
 echo "Checking if zsh is installed";
 which zsh
 if [ "$?" == "0" ]; then
 	ZSH_LOC="`which zsh`";
 	echo "********************************************************************************";
-	echo -e "zsh is installed, setting it as your login shell.  \nYou may be prompted for your password.";
+	echo "zsh is installed, use the following commands to locate it and set it as your";
+	echo "default login shell:";
+	echo "cat /etc/shells  (to find it's location)";
+	echo "chsh -s /path/to/zsh  (to set it as your shell)";
 	echo "********************************************************************************";
-	chsh -s $ZSH_LOC;
 else 
 	echo "********************************************************************************";
-	echo -e "zsh is not installed! Install it, then use\n 'chsh -s /bin/zsh'\nto make it your login shell.";
+	echo "zsh is not installed! Install it, then use the following commands to find it,";
+	echo "and set it as your default login shell:";
+	echo "cat /etc/shells  (to find it's location)";
+	echo "chsh -s /path/to/zsh  (to set it as your shell)";
 	echo "********************************************************************************";
 fi
-
-echo ""
-echo ""
-echo "********************************************************************************"
-echo "********************************************************************************"
-echo "******                                                                    ******"
-echo "******   Done!  See above for any errors.                                 ******"
-echo "******   You'll have to logout and back in for changes to take effect.    ******"
-echo "******                                                                    ******"
-echo "********************************************************************************"
-echo "********************************************************************************"
-echo ""
-echo ""
