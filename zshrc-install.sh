@@ -15,17 +15,23 @@ cat <<'EOF'
 EOF
 
 # Prereq check
+echo "Looking for wget"
 which wget
 if [ "$?" == "0" ]; then
 	DOWNLOADER="wget";
+	echo "Found it!"
 else
+echo "Looking for curl"
 which curl
 	if [ "$?" == "0" ]; then
 		DOWNLOADER="curl";
+		echo "Found it!"
 	else
+	echo "Looking for fetch"
 	which fetch
 	        if [ "$?" == "0" ]; then
         	        DOWNLOADER="fetch";
+			echo "Found it!"
 		fi
 	fi
 fi
