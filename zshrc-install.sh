@@ -35,7 +35,6 @@ if [ "$DOWNLOADER" == "None" ]; then
 	exit 1;
 fi
 
-clear;
 echo "********************************************************************************"
 echo "******   This script will install a customized .zshrc file and backup     ******"
 echo "******   any existing one to zshrc.bak.                                   ******"
